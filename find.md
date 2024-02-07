@@ -38,6 +38,7 @@ Valid Active Directory credentials
 ```
 
 ### Examples
+#### Basic query
 Run the find command to query LDAP.
 
 ```
@@ -64,7 +65,7 @@ d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888
 [21:15:03] INFO     [+] Found 5 principals that contain the string 'SCCM' or 'MECM'.                                                                                                                  
                                                                                      
 ```
-
+#### Verbose Query
 Run the find command with verbose output
 
 ```
