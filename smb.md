@@ -4,8 +4,19 @@
 
 ### Description
 
-Profile discovered SCCM infrastructure to determine their site system roles. Enumerates multiple services for default configuations. Services checked are SMB, HTTP(S), and MSSQL.
+Profile discovered SCCM infrastructure to determine their site system roles. Enumerates multiple services for default configuations. Services checked are SMB, HTTP(S), and MSSQL. The recon is broken down into 3 components:
 
+1. Site server profiling
+- Confirms connectivity 
+- Checks whether the site server is hosting the MSSQL service
+- Checks whether the site server is an active or passive site server
+- Checks if the site server is a central administration site
+
+2. Management point checks
+- Confirms connectivity to the HTTP endpoints
+
+3. Role checks
+- 
 ### Requirements
 
 Valid Active Directory credentials
@@ -46,4 +57,65 @@ d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888
 │            -save                        Save PXEBoot variables files if found.                                                                                                                     │
 │    --help  -h                           Show this message and exit.                                                                                                                                │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+### Examples
+#### Basic Run
+```
+└─# python3 sccmhunter.py smb -u administrator -p P@ssw0rd -d internal.lab -dc-ip 10.10.100.100 
+
+                                                                                          (
+                                    888                         d8                         \
+ dP"Y  e88'888  e88'888 888 888 8e  888 ee  8888 8888 888 8e   d88    ,e e,  888,8,        )
+C88b  d888  '8 d888  '8 888 888 88b 888 88b 8888 8888 888 88b d88888 d88 88b 888 "    ##-------->
+ Y88D Y888   , Y888   , 888 888 888 888 888 Y888 888P 888 888  888   888   , 888           )
+d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888          /
+                                                                                         (
+                                                                 vdev0.0.3                   
+                                                                 @garrfoster                    
+    
+    
+    
+[16:25:22] INFO     [+] Finished profiling Site Servers.                                                                                                                                              
+[16:25:23] INFO     +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | Hostname             | SiteCode   | CAS   | SigningStatus   | SiteServer   | SMSProvider   | Config   | MSSQL   |                                                               
+                    +======================+============+=======+=================+==============+===============+==========+=========+                                                               
+                    | sccm2.internal.lab   | ABC        | False | False           | True         | True          | Active   | True    |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | passive.internal.lab | ACT        | False | False           | True         | True          | Passive  | True    |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | active.internal.lab  | ACT        | False | False           | True         | True          | Active   | False   |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | sccm.internal.lab    | LAB        | False | False           | True         | True          | Active   | False   |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | cas.internal.lab     | CAS        | True  | False           | True         | True          | Active   | True    |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+[16:25:32] INFO     [+] Finished profiling Management Points.                                                                                                                                         
+[16:25:32] INFO     +---------------------+------------+-----------------+                                                                                                                            
+                    | Hostname            | SiteCode   | SigningStatus   |                                                                                                                            
+                    +=====================+============+=================+                                                                                                                            
+                    | sccm2.internal.lab  | ABC        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+                    | active.internal.lab | ACT        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+                    | mp.internal.lab     | LAB        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+                    | sccm.internal.lab   | LAB        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+[16:26:12] INFO     [+] Finished profiling all discovered computers.                                                                                                                                  
+[16:26:12] INFO     +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
+                    | Hostname             | SiteCode   | SigningStatus   | SiteServer   | ManagementPoint   | DistributionPoint   | SMSProvider   | WSUS   | MSSQL   |                               
+                    +======================+============+=================+==============+===================+=====================+===============+========+=========+                               
+                    | sccm2.internal.lab   | ABC        | False           | True         | True              | False               | True          | False  | True    |                               
+                    +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
+                    | passive.internal.lab | ACT        | False           | False        | False             | False               | True          | False  | True    |                               
+                    +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
+                    | active.internal.lab  | ACT        | False           | True         | True              | False               | True          | False  | False   |                               
+                    +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
+                    | sccm.internal.lab    | LAB        | False           | True         | True              | False               | True          | False  | False   |                               
+                    +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
+                    | cas.internal.lab     | CAS        | False           | True         | False             | False               | True          | False  | True    |                               
+                    +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
+                    | mp.internal.lab      | LAB        | False           | False        | True              | False               | False         | False  | False   |                               
+                    +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+ 
 ```
