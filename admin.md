@@ -158,6 +158,28 @@ software              Show installed software on the target system.
 ### Description
 ### Usage
 ### Example
+```
+() (C:\) >> get_device dp
+[19:54:23] INFO     ------------------------------------------                                                                                                                                                                         
+                    Active: 1                                                                                                                                                                                                          
+                    Client: 1                                                                                                                                                                                                          
+                    DistinguishedName: CN=DP,OU=SCCM_SiteSystems,DC=internal,DC=lab                                                                                                                                                    
+                    FullDomainName: INTERNAL.LAB                                                                                                                                                                                       
+                    IPAddresses: 10.10.100.11                                                                                                                                                                                          
+                    LastLogonUserDomain: LAB                                                                                                                                                                                           
+                    LastLogonUserName: administrator                                                                                                                                                                                   
+                    Name: DP                                                                                                                                                                                                           
+                    OperatingSystemNameandVersion: Microsoft Windows NT Server 10.0                                                                                                                                                    
+                    PrimaryGroupID: 515                                                                                                                                                                                                
+                    ResourceId: 16777221                                                                                                                                                                                               
+                    ResourceNames: dp.internal.lab                                                                                                                                                                                     
+                    SID: S-1-5-21-4004054868-2969153893-1580793631-1105                                                                                                                                                                
+                    SMSInstalledSites: LAB                                                                                                                                                                                             
+                    SMSUniqueIdentifier: GUID:7484EE6B-8D62-40CE-97A4-079F30EDA5A0                                                                                                                                                     
+                    ------------------------------------------                                                                                                                                                                         
+() (C:\) >> interact 16777221
+(16777221) (C:\) >> 
+```
 
 # administrators
 ### Description
