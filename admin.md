@@ -292,14 +292,39 @@ Replace the built-in CMPivot script stored in the site server database with a us
 
 
 ### Example
-
+```
+(16777221) (C:\Users\) >> backdoor /root/test.txt
+[23:34:54] INFO     Tasked SCCM to backdoor CMPivot with provided script                                                                                                                                                               
+IMPORTANT: Did you backup the script first? There is no going back without it. Y/N?Y
+[23:34:59] INFO     [+] CMPivot script updated successfully.                                                                                                                                                                           
+[23:35:01] INFO     [+] CMPivot script approved.   
+```
 # backup
 ### Description
 Backups the existing built-in CMPivot script. Required prior to any manipulation of the CMPivot script.
 
 ### Usage
 ### Example
-
+```
+(16777221) (C:\Users\) >> shell ls -l /root/.sccmhunter/logs/
+total 232
+-rw-r--r-- 1 root root 214176 Feb  7 23:35 console.log
+drwxr-xr-x 2 root root   4096 Feb  6 22:02 csvs
+drwxr-xr-x 2 root root   4096 Feb  7 19:59 db
+drwxr-xr-x 2 root root   4096 Feb  6 22:02 json
+drwxr-xr-x 2 root root   4096 Feb  6 22:02 loot
+(16777221) (C:\Users\) >> backup
+[23:38:11] INFO     Tasked SCCM to backup the CMPivot script.                                                                                                                                                                          
+[23:38:14] INFO     [+] Backup created successfully.                                                                                                                                                                                   
+(16777221) (C:\Users\) >> shell ls -l /root/.sccmhunter/logs/
+total 280
+-rw-r--r-- 1 root root  48651 Feb  7 23:38 cmpivot_backup.ps1
+-rw-r--r-- 1 root root 214176 Feb  7 23:35 console.log
+drwxr-xr-x 2 root root   4096 Feb  6 22:02 csvs
+drwxr-xr-x 2 root root   4096 Feb  7 19:59 db
+drwxr-xr-x 2 root root   4096 Feb  6 22:02 json
+drwxr-xr-x 2 root root   4096 Feb  6 22:02 loot
+```
 # delete_admin
 ### Description
 Remove a target administrator account from SCCM. Note: cannot be performed against itself.
@@ -312,7 +337,12 @@ Remove a target administrator account from SCCM. Note: cannot be performed again
 Restore a modified CMPivot script to its previous state.
 ### Usage
 ### Example
-
+```
+(16777221) (C:\Users\) >> restore 
+[23:35:05] INFO     Tasked SCCM to restore the original CMPivot script.                                                                                                                                                                
+[23:35:06] INFO     [+] CMPivot script updated successfully.                                                                                                                                                                           
+[23:35:07] INFO     [+] CMPivot script approved. 
+```
 # script
 ### Description
 Execute a provided PowerShell script on a target host. The script is intended to be self deleting from the remote host as well as from the site database. If the hierarchy is configured to require script approval (default) alternate credentials must be specified to approve the script. Alternate credentials can be obtained by using the `add_admin` command to add a secondary account as an administrator.
