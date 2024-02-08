@@ -98,26 +98,135 @@ software              Show installed software on the target system.
 ### Description
 ### Usage
 ### Example
+```
+() (C:\) >> get_collection *
+[19:56:18] INFO     [-] * collection(s) not found. Pulling collections from the API                                                                                                                                                    
+[19:56:18] INFO     [*] Collecting collections...                                                                                                                                                                                      
+[19:56:20] INFO     +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | CollectionID   |   MemberCount | Name                           |                                                                                                                                                
+                    +================+===============+================================+                                                                                                                                                
+                    | SMS00001       |            20 | All Systems                    |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMS00002       |             4 | All Users                      |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMS00003       |             0 | All User Groups                |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMS00004       |             4 | All Users and User Groups      |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMSOTHER       |             0 | All Custom Resources           |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMS000US       |             2 | All Unknown Computers          |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMS000PS       |             1 | All Provisioning Devices       |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMS000KM       |             0 | Co-management Eligible Devices |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMSDM001       |             0 | All Mobile Devices             |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+                    | SMSDM003       |            16 | All Desktop and Server Clients |                                                                                                                                                
+                    +----------------+---------------+--------------------------------+                                                                                                                                                
+() (C:\) >> get_collection SMS00001
+[19:56:27] INFO     --------------------------------------                                                                                                                                                                             
+                        CollectionID: SMS00001                                                                                                                                                                                         
+                        CollectionType: 2                                                                                                                                                                                              
+                        IsBuiltIn: True                                                                                                                                                                                                
+                        LimitToCollectionName: None                                                                                                                                                                                    
+                        MemberClassName: SMS_CM_RES_COLL_SMS00001                                                                                                                                                                      
+                        MemberCount: 20                                                                                                                                                                                                
+                        Name: All Systems                                                                                                                                                                                              
+                        ------------------------------------------                                                                                                                                                                     
+() (C:\) >> 
+```
 
 # get_device
 ### Description
 ### Usage
 ### Example
-
+```
+() (C:\) >> get_device mp
+[19:55:52] INFO     [*] Collecting device...                                                                                                                                                                                           
+[19:55:53] INFO     [+] Device found.                                                                                                                                                                                                  
+[19:55:53] INFO     ------------------------------------------                                                                                                                                                                         
+                    Active: 1                                                                                                                                                                                                          
+                    Client: 1                                                                                                                                                                                                          
+                    DistinguishedName: CN=MP,OU=SCCM_SiteSystems,DC=internal,DC=lab                                                                                                                                                    
+                    FullDomainName: INTERNAL.LAB                                                                                                                                                                                       
+                    IPAddresses: 10.10.100.13                                                                                                                                                                                          
+                    LastLogonUserDomain: None                                                                                                                                                                                          
+                    LastLogonUserName: None                                                                                                                                                                                            
+                    Name: MP                                                                                                                                                                                                           
+                    OperatingSystemNameandVersion: Microsoft Windows NT Server 10.0                                                                                                                                                    
+                    PrimaryGroupID: 515                                                                                                                                                                                                
+                    ResourceId: 16777219                                                                                                                                                                                               
+                    ResourceNames: mp.internal.lab                                                                                                                                                                                     
+                    SID: S-1-5-21-4004054868-2969153893-1580793631-1106                                                                                                                                                                
+                    SMSInstalledSites: LAB                                                                                                                                                                                             
+                    SMSUniqueIdentifier: GUID:D78C19DA-D4ED-474F-88D4-1566B96F2732                                                                                                                                                     
+                    ------------------------------------------                                                                                                                                                                         
+() (C:\) >> 
+```
 # get_lastlogon
 ### Description
 ### Usage
 ### Example
+```
+() (C:\) >> get_lastlogon administrator
+[19:57:23] INFO     [*] Collecting devices...                                                                                                                                                                                          
+[19:57:25] INFO     +------------------+-----------------------+---------------------+----------+--------------+-----------------------+                                                                                               
+                    | FullDomainName   | LastLogonUserDomain   | LastLogonUserName   | Name     |   ResourceId | ResourceNames         |                                                                                               
+                    +==================+=======================+=====================+==========+==============+=======================+                                                                                               
+                    | INTERNAL.LAB     | LAB                   | administrator       | DP       |     16777221 | dp.internal.lab       |                                                                                               
+                    +------------------+-----------------------+---------------------+----------+--------------+-----------------------+                                                                                               
+                    | INTERNAL.LAB     | LAB                   | administrator       | PC01     |     16777222 | pc01.internal.lab     |                                                                                               
+                    +------------------+-----------------------+---------------------+----------+--------------+-----------------------+                                                                                               
+                    | INTERNAL.LAB     | LAB                   | administrator       | CA       |     16777223 | ca.internal.lab       |                                                                                               
+                    +------------------+-----------------------+---------------------+----------+--------------+-----------------------+                                                                                               
+                    | INTERNAL.LAB     | LAB                   | administrator       | PROVIDER |     16777224 | provider.internal.lab |                                                                                               
+                    +------------------+-----------------------+---------------------+----------+--------------+-----------------------+                                                                                               
+                    | INTERNAL.LAB     | LAB                   | administrator       | WSUS     |     16777226 | wsus.internal.lab     |                                                                                               
+                    +------------------+-----------------------+---------------------+----------+--------------+-----------------------+                                                                                               
+() (C:\) >> 
+```
 
 # get_puser
 ### Description
 ### Usage
 ### Example
+```
+() (C:\) >> get_puser lowpriv
+[19:58:20] INFO     [-] Primary user data for lowpriv not found. Pulling from the API.                                                                                                                                                 
+[19:58:20] INFO     [*] Collecting primary users...                                                                                                                                                                                    
+[19:58:21] INFO     +------------+--------------------------+--------------+----------------+------------------+                                                                                                                       
+                    | IsActive   |   RelationshipResourceID |   ResourceID | ResourceName   | UniqueUserName   |                                                                                                                       
+                    +============+==========================+==============+================+==================+                                                                                                                       
+                    | True       |                 25165830 |     16777250 | DEV            | lab\lowpriv      |                                                                                                                       
+                    +------------+--------------------------+--------------+----------------+------------------+                                                                                                                       
+() (C:\) >> 
+```
 
 # get_user
 ### Description
 ### Usage
 ### Example
+```
+() (C:\) >> get_user lowpriv
+[19:59:01] INFO     [*] Collecting users...                                                                                                                                                                                            
+[19:59:02] INFO     [+] User found.                                                                                                                                                                                                    
+[19:59:02] INFO     ------------------------------------------                                                                                                                                                                         
+                    DistinguishedName: CN=lowpriv,CN=Users,DC=internal,DC=lab                                                                                                                                                          
+                    FullDomainName: INTERNAL.LAB                                                                                                                                                                                       
+                    FullUserName: lowpriv                                                                                                                                                                                              
+                    Mail:                                                                                                                                                                                                              
+                    NetworkOperatingSystem: Windows NT                                                                                                                                                                                 
+                    ResourceId: 2063597570                                                                                                                                                                                             
+                    sid: S-1-5-21-4004054868-2969153893-1580793631-1113                                                                                                                                                                
+                    UniqueUserName: LAB\lowpriv                                                                                                                                                                                        
+                    UserAccountControl: 512                                                                                                                                                                                            
+                    UserName: lowpriv                                                                                                                                                                                                  
+                    UserPrincipalName: None                                                                                                                                                                                            
+                    ------------------------------------------                                                                                                                                                                         
+() (C:\) >> 
+```
 
 # add_admin
 ### Description
