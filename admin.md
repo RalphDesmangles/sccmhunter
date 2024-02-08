@@ -1,5 +1,3 @@
-# admin
-
 # Using the admin module
 
 ### Description
