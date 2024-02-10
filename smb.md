@@ -1,5 +1,3 @@
-# smb
-
 ## Using the smb command
 
 ### Description
