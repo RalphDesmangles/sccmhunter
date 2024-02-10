@@ -1,5 +1,3 @@
-# find
-
 ## Using the find command
 
 ### Description
