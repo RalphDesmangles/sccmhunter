@@ -13,11 +13,23 @@ Profile discovered SCCM infrastructure to determine their site system roles. Enu
 2. Management point checks
 - Confirms connectivity to the HTTP endpoints
 
-3. Role checks
-- 
+3. Role checks and config
+-  Checks for associated site codes from default file shares
+-  Checks if SMB signing is disabled
+-  Checks for the following site system roles:
+    1. Site Server
+    2. Management Point
+    3. Distribution Point - If the distribution point is found hosting a variables file, the path is logged and optionally saved automatically to the logs directory
+    4. SMS Provider
+    5. MSSQL
+    6. WSUS
+
+
 ### Requirements
 
-Valid Active Directory credentials
+- Valid Active Directory credentials
+- Network connectivity to the various services being checked
+
 
 ### Usage
 
