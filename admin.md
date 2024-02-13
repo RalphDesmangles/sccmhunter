@@ -97,7 +97,7 @@ software              Show installed software on the target system.
 # get_collection
 
 ### Description
-The get_collection module can pull data regarding a single collection or recover all configured collections from the site server. Each type of query is demonstrated in the example below.
+The get_collection module can pull data regarding a single collection or recover all configured collections from the site server. Each query is demonstrated in the example below.
 
 ### Usage
 
@@ -148,7 +148,7 @@ get_collection        Query for all (*) or single (id) collection(s)
 
 ### Description
 
-The get_device command will query the site server for a provided hostname. If the request is the first time the host has been queried, the data is pulled from the API. Otherwise, the results are stored in a local database to avoid unnecessary queires.
+The get_device command will query the site server for a provided hostname. If the request is the first time the host has been queried, the data is pulled from the API. Otherwise, the results are stored in a local database to avoid unnecessary queries.
 ### Usage
 
 get_device [hostname]
@@ -231,7 +231,7 @@ get_puser [username]
 
 ### Description
 
-Query SCCM for details for a provided username.
+Query SCCM for details for a provided username. If the request is the first time the user has been queried, the data is pulled from the API. Otherwise, the results are stored in a local database to avoid unnecessary queries.
 
 ### Usage
 
@@ -396,8 +396,17 @@ whoami
 ```
 # show_admins
 ### Description
+Show the current SCCM admin accounts.
 ### Usage
+show_admins
 ### Example
+```
+() C:\ >> show_admins
+[22:13:53] INFO     Tasked SCCM to list current SMS Admins.                                                                                                                                     
+[22:13:53] INFO     Current Full Admin Users:                                                                                                                                                   
+[22:13:53] INFO     LAB\Administrator                                                                                                                                                           
+() (C:\) >> 
+```
 
 # interact
 ### Description 
@@ -729,7 +738,9 @@ cd [filepath]
 
 # ipconfig
 ### Description
+Run ipconfig on the interactive host and retrieve networking info.
 ### Usage
+ipconfig
 ### Example
 ```
 (16777221) (C:\) >> ipconfig 
@@ -763,7 +774,9 @@ cd [filepath]
 
 # ls
 ### Description
+Will list the current directory represeted on the command line. Defaults to C:\. You must issue a cd command to another known directory (i.e. `cd C:\Users` to list the contents of that Users directory and so on.
 ### Usage
+ls
 ### Example
 ```
 (16777221) (C:\) >> ls
@@ -808,7 +821,8 @@ cd [filepath]
 ```
 
 # osinfo
-### Description
+### Description 
+Query operating system and architecture info for the interactive device
 ### Usage
 ### Example
 ```
@@ -824,7 +838,9 @@ cd [filepath]
 
 # ps
 ### Description
+List current running processes for the interactive device
 ### Usage
+ps
 ### Example
 ```
 (16777221) (C:\) >> ps
@@ -862,7 +878,9 @@ cd [filepath]
 
 # services
 ### Description
+List current running services on the interactive device
 ### Usage
+services
 ### Example
 ```
 (16777221) (C:\) >> services 
@@ -890,7 +908,9 @@ cd [filepath]
 
 # sessions
 ### Description
+List active sessions on the interactive device
 ### Usage
+sessions
 ### Example
 ```
 (16777221) (C:\) >> sessions
@@ -914,8 +934,10 @@ cd [filepath]
 (16777221) (C:\) >> 
 ```
 # shares
-### Description
+### Description 
+List all available file shares on the interactive device
 ### Usage
+shares
 ### Example
 ```
 (16777221) (C:\) >> shares
@@ -942,7 +964,9 @@ cd [filepath]
 
 # software
 ### Description
+List currently installed software on the interactive device
 ### Usage
+software
 ### Example
 ```
 (16777221) (C:\) >> software 
