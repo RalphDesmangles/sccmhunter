@@ -80,7 +80,7 @@ d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888
 ┌──(root㉿kali)-[/opt/sccmhunter]
 ```
 
-#### Saving Results
+#### Saving results
 ```
 └─# python3 sccmhunter.py show -siteservers -json -csv
 
