@@ -13,7 +13,7 @@ Profile discovered SCCM infrastructure to determine their site system roles. Enu
 2. Management point checks
 - Confirms connectivity to the HTTP endpoints
 
-3. Role checks and config
+3. Role and config checks
 -  Checks for associated site codes from default file shares
 -  Checks if SMB signing is disabled
 -  Checks for the following site system roles:
@@ -128,4 +128,68 @@ d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888
                     +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                               
                     | mp.internal.lab      | LAB        | False           | False        | True              | False               | False         | False  | False   |                               
                     +----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+ 
+```
+
+#### Finding and saving PXE boot files
+```
+└─# python3 sccmhunter.py smb -u administrator -p P@ssw0rd -d internal.lab -dc-ip 10.10.100.100 -save     
+SCCMHunter vdev0.0.3 by @garrfoster
+[11:52:38] INFO     Profiling 5 site servers.                                                                                                                                                         
+[11:53:00] INFO     [+] Finished profiling Site Servers.                                                                                                                                              
+[11:53:00] INFO     +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | Hostname             | SiteCode   | CAS   | SigningStatus   | SiteServer   | SMSProvider   | Config   | MSSQL   |                                                               
+                    +======================+============+=======+=================+==============+===============+==========+=========+                                                               
+                    | active.internal.lab  | ACT        | False | False           | True         | True          | Active   | False   |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | sccm.internal.lab    | LAB        | False | False           | True         | True          | Active   | False   |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | passive.internal.lab | ACT        | False | False           | True         | True          | Passive  | True    |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | cas.internal.lab     | CAS        | True  | False           | True         | True          | Active   | True    |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+                    | sccm2.internal.lab   | ABC        | False | False           | True         | True          | Active   | True    |                                                               
+                    +----------------------+------------+-------+-----------------+--------------+---------------+----------+---------+                                                               
+[11:53:00] INFO     Profiling 4 management points.                                                                                                                                                    
+[11:53:16] INFO     [+] Finished profiling Management Points.                                                                                                                                         
+[11:53:16] INFO     +---------------------+------------+-----------------+                                                                                                                            
+                    | Hostname            | SiteCode   | SigningStatus   |                                                                                                                            
+                    +=====================+============+=================+                                                                                                                            
+                    | mp.internal.lab     | LAB        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+                    | sccm.internal.lab   | LAB        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+                    | sccm2.internal.lab  | ABC        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+                    | active.internal.lab | ACT        | False           |                                                                                                                            
+                    +---------------------+------------+-----------------+                                                                                                                            
+[11:53:16] INFO     Profiling 11 computers.                                                                                                                                                           
+[11:54:01] INFO     [*] Searching dp.internal.lab for PXEBoot variables files.                                                                                                                        
+[11:54:02] INFO     [+] Variables files downloaded!                                                                                                                                                   
+[11:54:02] INFO     [+] Results saved to /root/.sccmhunter/logs/smbhunter.log                                                                                                                         
+[11:54:02] INFO     [+] Finished profiling all discovered computers.                                                                                                                                  
+[11:54:02] INFO     +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | Hostname              | SiteCode   | SigningStatus   | SiteServer   | ManagementPoint   | DistributionPoint   | SMSProvider   | WSUS   | MSSQL   |                              
+                    +=======================+============+=================+==============+===================+=====================+===============+========+=========+                              
+                    | active.internal.lab   | ACT        | False           | True         | False             | False               | True          | False  | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | sccm.internal.lab     | LAB        | False           | True         | False             | False               | True          | False  | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | passive.internal.lab  | ACT        | False           | False        | False             | False               | True          | False  | True    |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | cas.internal.lab      | CAS        | False           | True         | False             | False               | True          | False  | True    |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | sccm2.internal.lab    | ABC        | False           | True         | False             | False               | True          | False  | True    |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | mp.internal.lab       | LAB        | False           | False        | True              | False               | False         | False  | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | share.internal.lab    | None       | False           | False        | False             | False               | False         | False  | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | sql2.internal.lab     | None       | False           | False        | False             | False               | False         | False  | True    |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | wsus.internal.lab     | None       | False           | False        | False             | False               | False         | True   | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | provider.internal.lab | None       | False           | False        | False             | False               | False         | False  | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+                              
+                    | dp.internal.lab       | LAB        | False           | False        | False             | True                | False         | False  | False   |                              
+                    +-----------------------+------------+-----------------+--------------+-------------------+---------------------+---------------+--------+---------+ 
 ```
