@@ -1,3 +1,5 @@
+## Using the dpapi module
+
 ### Description
 
 Recover SCCM Network Access Account credentials from a remote target system. 
