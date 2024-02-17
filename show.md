@@ -1,10 +1,10 @@
 ## Using the show command
 
 ### Description
+This module lets you display and export recon results. In larger environments where there's too much information to review from a terminal you can export the data to a csv or json. I've found this most useful when reviewing the users and groups results.
 
 ### Requirements
-
-Valid Active Directory credentials
+Need results from the `find` and/or `smb` modules
 
 ### Usage
 
