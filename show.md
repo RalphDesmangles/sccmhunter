@@ -35,7 +35,9 @@ d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888
 │         -mps                Show ManagementPoints table                                                                                                                                                                             │
 │         -users              Show SCCM related users.                                                                                                                                                                                │
 │         -computers          Show SCCM related computers.                                                                                                                                                                            │
-│         -groups             Show SCCM related groups.                                                                                                                                                                               │
+│         -groups             Show SCCM related groups.  
+│    
+│         -creds              Show recovered SCCM credentials.                                                                                                                                                                               │
 │         -all                Show all recon results.                                                                                                                                                                                 │
 │         -json               Export chosen results in JSON.                                                                                                                                                                          │
 │         -csv                Export chosen results in CSV.                                                                                                                                                                           │
