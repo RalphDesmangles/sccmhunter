@@ -26,24 +26,25 @@ d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888
     
     
                                                                                                                                                                                                                                        
- Usage: sccmhunter show [OPTIONS] COMMAND [ARGS]...                                                                                                                                                                                    
-                                                                                                                                                                                                                                       
- Show and/or recon table results.                                                                                                                                                                                                      
-                                                                                                                                                                                                                                       
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│         -siteservers        Show SiteServers table                                                                                                                                                                                  │
-│         -mps                Show ManagementPoints table                                                                                                                                                                             │
-│         -users              Show SCCM related users.                                                                                                                                                                                │
-│         -computers          Show SCCM related computers.                                                                                                                                                                            │
-│         -groups             Show SCCM related groups.  
-│    
-│         -creds              Show recovered SCCM credentials.                                                                                                                                                                               
-│         -all                Show all recon results.                                                                                                                                                                                 │
-│         -json               Export chosen results in JSON.                                                                                                                                                                          │
-│         -csv                Export chosen results in CSV.                                                                                                                                                                           │
-│         -debug              Enable Verbose Logging                                                                                                                                                                                  │
-│ --help  -h                  Show this message and exit.                                                                                                                                                                             │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                                                                                                                                                                   
+ Usage: sccmhunter show [OPTIONS] COMMAND [ARGS]...                                                                                                                                                
+                                                                                                                                                                                                   
+ Show and/or recon table results.                                                                                                                                                                  
+                                                                                                                                                                                                   
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│         -siteservers        Show SiteServers table                                                                                                                                              │
+│         -mps                Show ManagementPoints table                                                                                                                                         │
+│         -users              Show SCCM related users.                                                                                                                                            │
+│         -computers          Show SCCM related computers.                                                                                                                                        │
+│         -groups             Show SCCM related groups.                                                                                                                                           │
+│         -creds              Show recovered SCCM credentials.                                                                                                                                    │
+│         -all                Show all recon results.                                                                                                                                             │
+│         -json               Export chosen results in JSON.                                                                                                                                      │
+│         -csv                Export chosen results in CSV.                                                                                                                                       │
+│         -debug              Enable Verbose Logging                                                                                                                                              │
+│ --help  -h                  Show this message and exit.                                                                                                                                         │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+──────────────────────────────────────────────────────────╯
 
 ```
 ### Examples
