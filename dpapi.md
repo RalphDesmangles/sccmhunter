@@ -7,13 +7,8 @@ Recover SCCM Network Access Account credentials from a remote target system.
 ### Requirements
 
 Valid credentials for a local administrator on the target system
-
-
-### Examples
-
-```
-
 ### Usage
+```
 └─# python3 sccmhunter.py dpapi -h                                                                                   
 SCCMHunter vdev0.0.3 by @garrfoster
                                                                                                                                                                                                       
@@ -38,7 +33,7 @@ SCCMHunter vdev0.0.3 by @garrfoster
 ```
 
 
-
+### Examples
 ```
 └─# python3 sccmhunter.py dpapi -u administrator -p P@ssw0rd -d internal.lab -dc-ip 10.10.100.100 -target 10.10.100.9
 SCCMHunter vdev0.0.3 by @garrfoster
