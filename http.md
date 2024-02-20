@@ -5,7 +5,7 @@ The http module combines [Adam Chester's](https://github.com/xpn/sccmwtf) resear
 
 -'NoneType' object has no attribute split
 
-I've had multiple users send me messages related to this error during the registration and subsequent request. This was difficult to duplicate in a lab environment but my conclusion is this is due to the policy not being available due to factors like the SCCM database just being its slow self or user's executing commands through a proxy which will logically increase the amount of time needed to wait before requesting a policy. To combat this, you can either extend the amount of sleep time with the `-sleep` flag or record the registration guid and request the policy at a later time to whatever Management Point you successfully registred with with the `-mp` and `-uuid` flags. 
+I've had multiple users send me messages related to this error during the registration and subsequent request. This was difficult to duplicate in a lab environment but my conclusion is this is due to the policy not being available due to factors like the SCCM database just being its slow self or users executing commands through a proxy which will logically increase the amount of time needed to wait before requesting a policy. To combat this, you can either extend the amount of sleep time with the `-sleep` flag or record the registration guid and request the policy at a later time to whatever Management Point you successfully registred with with the `-mp` and `-uuid` flags. 
 
 ### Requirements
 
