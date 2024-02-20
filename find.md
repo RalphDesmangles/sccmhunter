@@ -2,7 +2,13 @@
 
 ### Description
 
-Query LDAP for the presence of SCCM related infrastructure. 
+Query LDAP for the presence of SCCM related infrastructure via the following three checks:
+1. Checks the DACL for the 'System Management' container manually created during AD schema extension
+2. Checks for published Managment Points for clients to query
+3. Checks for the strings SCCM and MECM in the entire directory due to observed naming convention habits
+    - Nested group resolution is not enabled by default, use the `-resolve` flag to dig into nested groups. I've only tested this function in a lab so your results may vary or be inefficient. Please let me know if you run into issues if you choose to use the flag. I've added some terminal output for results and duplicates as they're found to try and help with this.
+
+
 
 ### Requirements
 
